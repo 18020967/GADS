@@ -8,39 +8,27 @@ public class Placement : MonoBehaviour
 	Vector3 cellPos; 
 	GameObject ClickUnit;
 
-	//int MoveDistance = 5;
+	int Blue_Units = 0;
+	int Red_Units = 0;
 
 	string Turn = "blue";
 
-	bool Distance = false;
+	string word;
 
-	int x = 0;
-	int y = 0;
+	bool Distance = false;
 
 	float Current_mana;
 	float Max_mana;
 	
 	float Mana_cap = 10;
-	
-
 
 	// Start is called before the first frame update
 	void Start()
     {
-		Max_mana = 2;
-		Current_mana = Max_mana;
 		
+		StartGame();
 
-		CellsArray = new GameObject[16, 16];
-
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				CellsArray[i, j] = Instantiate(item, new Vector3(i, 1, j), Quaternion.identity);
-				CellsArray[i, j] = Instantiate(item2, new Vector3(i+12, 1, j+12), Quaternion.identity);
-			}
-		}
+		
 	}
 
 	// Update is called once per frame
@@ -58,7 +46,7 @@ public class Placement : MonoBehaviour
 			{
 				ClickUnit = hit.collider.transform.gameObject;
 
-				Debug.Log("Unit selected");
+				//Debug.Log("Unit selected");
 
 
 			}else if ((hit.collider.tag == "Mesh") && (ClickUnit != null))
@@ -68,7 +56,7 @@ public class Placement : MonoBehaviour
 				PlaceUnit();
 				
 				
-				Debug.Log("Cell selected  " + "  "+ cellPos.x+" "+  cellPos.z+" " + CellsArray[Mathf.RoundToInt(cellPos.x), Mathf.RoundToInt(cellPos.z)]);
+				//Debug.Log("Cell selected  " + "  "+ cellPos.x+" "+  cellPos.z+" " + CellsArray[Mathf.RoundToInt(cellPos.x), Mathf.RoundToInt(cellPos.z)]);
 			}else if((ClickUnit != null)&& (hit.collider.tag != "Mesh")&& (hit.collider.tag != Turn))
 			{
 				CaculateDistance();
@@ -76,6 +64,14 @@ public class Placement : MonoBehaviour
 				{
 					Destroy(hit.collider.gameObject);
 					Distance = false;
+					if (hit.collider.tag == "red")
+					{
+						Red_Units--;
+					}else if (hit.collider.tag == "blue")
+					{
+						Blue_Units--;
+					}
+
 					Current_mana--;
 				}
 				
@@ -85,7 +81,20 @@ public class Placement : MonoBehaviour
 
 		}
 		GameObject go = GameObject.Find("Canvas");
-		go.GetComponent<UI_Text>().UpdateScore(Max_mana,Current_mana);
+		go.GetComponent<UI_Text>().UpdateScore(Max_mana,Current_mana,Turn,Blue_Units,Red_Units);
+
+		if (Red_Units <=0)
+		{
+			Debug.Log("Blue Wins");
+			
+			go.GetComponent<UI_Text>().Winner("Blue");
+		}
+
+		if (Blue_Units <0)
+		{
+			Debug.Log("Red Wins");
+			go.GetComponent<UI_Text>().Winner("Red");
+		}
 	}
 	void CaculateDistance()
 	{
@@ -133,7 +142,7 @@ public class Placement : MonoBehaviour
 		{
 			Turn = "blue";
 		}
-		Debug.Log("TurnChanged : " +Turn);
+		//Debug.Log("TurnChanged : " +Turn);
 
 		if (Mana_cap > Max_mana)
 		{
@@ -141,6 +150,8 @@ public class Placement : MonoBehaviour
 		}
 		
 		Current_mana = Max_mana;
+		ClickUnit = null;
+		Distance = false;
 	}
 
 	void PlaceUnit()
@@ -159,4 +170,27 @@ public class Placement : MonoBehaviour
 			Current_mana--;
 		}
 	}
+
+	void StartGame()
+	{
+		CellsArray = new GameObject[16, 16];
+		Max_mana = 2;
+		Current_mana = Max_mana;
+
+
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				CellsArray[i, j] = Instantiate(item, new Vector3(i, 1, j), Quaternion.identity);
+				word = i.ToString() + ":" + j.ToString();
+				CellsArray[i + 12, j + 12] = Instantiate(item2, new Vector3(i + 12, 1, j + 12), Quaternion.identity);
+				word = i + 12.ToString() + ":" + j + 12.ToString();
+				Red_Units++;
+				Blue_Units++;
+			}
+		}
+	}
+
+
 }
