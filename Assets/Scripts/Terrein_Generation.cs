@@ -6,7 +6,7 @@ public class Terrein_Generation : MonoBehaviour
 	public GameObject Block_2;
 
 	bool grid= false;
-    // Start is called before the first frame update
+    //Using nested for loops to place the grid in a 16 x 16 pattern
     void Start()
     {
 		for (int i = 0; i < 16; i++)
