@@ -1872,6 +1872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2144002317}
   - component: {fileID: 2144002318}
+  - component: {fileID: 2144002319}
   m_Layer: 0
   m_Name: GM
   m_TagString: GameController
@@ -1908,3 +1909,34 @@ MonoBehaviour:
   item: {fileID: 1151056166651264299, guid: 9dd464795f83d7749a4a6bb8637a9955, type: 3}
   item2: {fileID: 3211671484911623937, guid: 193abda49227f1d4d8a394d3e2f1344f, type: 3}
   Obstacle: {fileID: 4021399146410911722, guid: 3b261be673c14204a8fd27b53c42b8f9, type: 3}
+  cellPos: {x: 0, y: 0, z: 0}
+  ClickUnit: {fileID: 0}
+  RedList: []
+  BlueList: []
+  Blue_Units: 0
+  Red_Units: 0
+  Turn: blue
+  word: 
+  Distance: 0
+  Current_mana: 0
+  Max_mana: 0
+  Mana_cap: 10
+--- !u!95 &2144002319
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144002316}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c6fc73179615bcf43899ed33d8c05cae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

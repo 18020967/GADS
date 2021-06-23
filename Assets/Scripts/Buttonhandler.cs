@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Buttonhandler : MonoBehaviour
 {
@@ -21,5 +22,18 @@ public class Buttonhandler : MonoBehaviour
 	{
 		Application.Quit();
 
+	}
+
+
+	public Button Button;
+
+	public void DisableButton()
+	{
+		Button.interactable = false;
+	}
+
+	public void EnableButton()
+	{
+		Button.interactable = true;
 	}
 }

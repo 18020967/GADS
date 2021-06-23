@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Placement : MonoBehaviour
 {
@@ -6,23 +7,31 @@ public class Placement : MonoBehaviour
 	public GameObject item2;
 	public GameObject Obstacle;
 
-	GameObject[,]CellsArray;
-	Vector3 cellPos; 
-	GameObject ClickUnit;
+	public GameObject[,]CellsArray;
 
-	int Blue_Units = 0;
-	int Red_Units = 0;
+	//==============================
+	public Vector3 cellPos; 
 
-	string Turn = "blue";
+	public GameObject ClickUnit;
 
-	string word;
+	public List<GameObject> RedList = new List<GameObject>();
+	public List<GameObject> BlueList = new List<GameObject>();
+	//==============================
 
-	bool Distance = false;
 
-	float Current_mana;
-	float Max_mana;
-	
-	float Mana_cap = 10;
+	public int Blue_Units = 0;
+	public int Red_Units = 0;
+
+	public string Turn = "blue";
+
+	public string word;
+
+	public bool Distance = false;
+
+	public float Current_mana;
+	public float Max_mana;
+
+	public float Mana_cap = 10;
 
 	// Start is called before the first frame update
 	void Start()
@@ -101,6 +110,13 @@ public class Placement : MonoBehaviour
 			Debug.Log("Red Wins");
 			go.GetComponent<UI_Text>().Winner("Red");
 		}
+
+
+	
+
+
+
+
 	}
 	void CaculateDistance()
 	{
@@ -162,7 +178,7 @@ public class Placement : MonoBehaviour
 		Distance = false;
 	}
 
-	void PlaceUnit()
+	public void PlaceUnit()
 	{
 		//This statement checks if the block where the player wants to place a unit is clear
 		//it also checks if the block is next to the player
@@ -197,8 +213,10 @@ public class Placement : MonoBehaviour
 			for (int j = 0; j < 4; j++)
 			{
 				CellsArray[i, j] = Instantiate(item, new Vector3(i, 1, j), Quaternion.identity);
+				BlueList.Add(CellsArray[i, j]);
 				//word = i.ToString() + ":" + j.ToString();
 				CellsArray[i + 12, j + 12] = Instantiate(item2, new Vector3(i + 12, 1, j + 12), Quaternion.identity);
+				RedList.Add(CellsArray[i+12, j+12]);
 				//word = i + 12.ToString() + ":" + j + 12.ToString();
 				Red_Units++;
 				Blue_Units++;
