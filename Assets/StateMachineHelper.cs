@@ -8,7 +8,7 @@ public class StateMachineHelper : MonoBehaviour
 
 	public GameObject SelectUnit;
 
-	public bool turnChance = false;
+	
 
 
 }

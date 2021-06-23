@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca0590f15bd5bf48b1b55350f2b0305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 271489672}
 --- !u!114 &271489672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,6 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca0590f15bd5bf48b1b55350f2b0305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 582860158}
 --- !u!114 &582860158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,6 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca0590f15bd5bf48b1b55350f2b0305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Button: {fileID: 736394733}
 --- !u!114 &736394733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1873,6 +1876,7 @@ GameObject:
   - component: {fileID: 2144002317}
   - component: {fileID: 2144002318}
   - component: {fileID: 2144002319}
+  - component: {fileID: 2144002320}
   m_Layer: 0
   m_Name: GM
   m_TagString: GameController
@@ -1940,3 +1944,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2144002320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144002316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b331c2e217f5f4dace1ba63e1a8d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectUnit: {fileID: 0}

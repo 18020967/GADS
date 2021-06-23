@@ -12,11 +12,21 @@ public class Placing : StateMachineBehaviour
 		if ((GameObject.Find("GM").GetComponent<Placement>().Current_mana >= 1))
 		{
 
-			go.GetComponent<StateMachineHelper>().SelectUnit.transform.position =
-				go.GetComponent<StateMachineHelper>().SelectUnit.transform.position - new Vector3(0, 0, 1);
-			go.GetComponent<Placement>().ClickUnit = null;
+			//go.GetComponent<StateMachineHelper>().SelectUnit.transform.position =
+			//go.GetComponent<StateMachineHelper>().SelectUnit.transform.position - new Vector3(0, 0, 1);
+
+			go.GetComponent<Placement>().Distance = true;
+
+			go.GetComponent<Placement>().PlaceUnit(go.GetComponent<StateMachineHelper>().SelectUnit.transform.position + new Vector3(0, 0, -1), go.GetComponent<StateMachineHelper>().SelectUnit);
+			
 			go.GetComponent<Placement>().Distance = false;
-			go.GetComponent<Placement>().Current_mana--;
+		
+
+
+
+
+
+		
 		}
 		else//(GameObject.Find("GM").GetComponent<Placement>().Current_mana <= 0.5)
 		{

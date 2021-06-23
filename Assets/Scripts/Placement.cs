@@ -65,7 +65,7 @@ public class Placement : MonoBehaviour
 
 			{
 				CaculateDistance();
-				PlaceUnit();
+				PlaceUnit(cellPos,ClickUnit);
 				
 				
 				//Debug.Log("Cell selected  " + "  "+ cellPos.x+" "+  cellPos.z+" " + CellsArray[Mathf.RoundToInt(cellPos.x), Mathf.RoundToInt(cellPos.z)]);
@@ -79,9 +79,11 @@ public class Placement : MonoBehaviour
 					Distance = false;
 					if (hit.collider.tag == "red")
 					{
+						RedList.Remove(hit.collider.gameObject);
 						Red_Units--;
 					}else if (hit.collider.tag == "blue")
 					{
+						BlueList.Remove(hit.collider.gameObject);
 						Blue_Units--;
 					}
 
@@ -178,19 +180,21 @@ public class Placement : MonoBehaviour
 		Distance = false;
 	}
 
-	public void PlaceUnit()
+	public void PlaceUnit(Vector3 Cellpos, GameObject Unit)
 	{
+
+
 		//This statement checks if the block where the player wants to place a unit is clear
 		//it also checks if the block is next to the player
 		//and looks to see if the player has the resources to place the unit
-		if ((CellsArray[Mathf.RoundToInt(cellPos.x), Mathf.RoundToInt(cellPos.z)] == null) && (Distance == true)&&(Current_mana >=1))
+		if ((CellsArray[Mathf.RoundToInt(Cellpos.x), Mathf.RoundToInt(Cellpos.z)] == null) && (Distance == true)&&(Current_mana >=1))
 		{
 			//This clears the previous position of the unit in the arry
-			CellsArray[Mathf.RoundToInt(ClickUnit.gameObject.transform.position.x), Mathf.RoundToInt(ClickUnit.gameObject.transform.position.z)] = null;
+			CellsArray[Mathf.RoundToInt(Unit.gameObject.transform.position.x), Mathf.RoundToInt(Unit.gameObject.transform.position.z)] = null;
 			//moves the unit to new location
-			ClickUnit.transform.position = cellPos;
+			Unit.transform.position = Cellpos;
 			//Fills the array with the new unit location
-			CellsArray[Mathf.RoundToInt(cellPos.x), Mathf.RoundToInt(cellPos.z)] = ClickUnit.gameObject;
+			CellsArray[Mathf.RoundToInt(Cellpos.x), Mathf.RoundToInt(Cellpos.z)] = Unit.gameObject;
 
 
 			ClickUnit = null;
