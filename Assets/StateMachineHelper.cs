@@ -14,11 +14,12 @@ public class StateMachineHelper : MonoBehaviour
 
 	private void Update()
 	{
-		if (TargetUnit != null)
+		if (TargetUnit != null && SelectUnit != null)
 		{
+			GameObject go = GameObject.Find("GM");
+			
 
-		
-		Debug.DrawLine(SelectUnit.transform.position, TargetUnit.transform.position, Color.red);
+			Debug.DrawLine(SelectUnit.transform.position, TargetUnit.transform.position, Color.red);
 		}
 	}
 

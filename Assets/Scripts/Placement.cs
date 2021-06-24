@@ -105,12 +105,14 @@ public class Placement : MonoBehaviour
 			Debug.Log("Blue Wins");
 			
 			go.GetComponent<UI_Text>().Winner("Blue");
+			go.GetComponent<Animator>().SetBool("IsWaiting", true);
 		}
 
 		if (Blue_Units <=0)
 		{
 			Debug.Log("Red Wins");
 			go.GetComponent<UI_Text>().Winner("Red");
+			go.GetComponent<Animator>().SetBool("IsWaiting", true);
 		}
 
 

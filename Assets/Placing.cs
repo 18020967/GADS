@@ -45,11 +45,17 @@ public class Placing : StateMachineBehaviour
 			}
 			else
 			{
+				if (go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)].tag == "blue")
+				{
+					go.GetComponent<Placement>().Blue_Units--;
+				}
+
 				Destroy(go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)]);
 				go.GetComponent<StateMachineHelper>().TargetUnit = null;
 				go.GetComponent<Placement>().BlueList.Remove(go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)]);
 				go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)] = null;
 				go.GetComponent<Placement>().Current_mana--;
+				
 			}
 			go.GetComponent<Placement>().Distance = false;
 				
@@ -80,6 +86,8 @@ public class Placing : StateMachineBehaviour
 			movingPoint.z = 0;
 		}
 	}
+
+
 
 
 	
