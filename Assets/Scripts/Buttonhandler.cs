@@ -9,7 +9,7 @@ public class Buttonhandler : MonoBehaviour
 	{
 		GameObject go = GameObject.Find("GM");
 		go.GetComponent<Placement>().ChangeTurn();
-	
+		this.enabled = false;
 		//Debug.Log("TurnChanged : " + PlayerTurn);
 	}
 	//Button to restart the Game

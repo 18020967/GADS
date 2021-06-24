@@ -13,6 +13,7 @@ public class ChooseUnit : StateMachineBehaviour
 
 
 	public GameObject SelectedUnit;
+	
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 
@@ -24,7 +25,7 @@ public class ChooseUnit : StateMachineBehaviour
 			GameObject nearestObj = null;
 			foreach (var redUnit in go.GetComponent<Placement>().RedList)
 			{
-				if (Vector3.Distance(blueUnit.transform.position, redUnit.transform.position) < nearestDist)
+				if ((Vector3.Distance(blueUnit.transform.position, redUnit.transform.position) < nearestDist)&&(blueUnit !=null)&& (redUnit != null))
 				{
 					nearestDist = Vector3.Distance(blueUnit.transform.position, redUnit.transform.position);
 					nearestObj = redUnit;
@@ -35,6 +36,7 @@ public class ChooseUnit : StateMachineBehaviour
 
 			Debug.DrawLine(blueUnit.transform.position, nearestObj.transform.position, Color.red);
 		}
+	
 
 		if (SelectedUnit != null)
 		{			

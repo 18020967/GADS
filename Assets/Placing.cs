@@ -4,38 +4,80 @@ using UnityEngine;
 
 public class Placing : StateMachineBehaviour
 {
-	
+	Vector3 movingPoint;
+	Vector3 targetPoint;
+
+
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		animator.SetBool("HasTarget", false);
+		movingPoint.Set(0, 0, 0);
 		GameObject go = GameObject.Find("GM");
-		if ((GameObject.Find("GM").GetComponent<Placement>().Current_mana >= 1))
+		if (go.GetComponent<StateMachineHelper>().BotDestination.x > 0)
 		{
+			movingPoint.x = -1;
+			setZ();
+		}
+		else if (go.GetComponent<StateMachineHelper>().BotDestination.x < 0)
+		{
+			movingPoint.x = 1;
+			setZ();
+		}else if (go.GetComponent<StateMachineHelper>().BotDestination.x == 0)
+		{
+			movingPoint.x = 0;
+			setZ();
+		}
 
-			//go.GetComponent<StateMachineHelper>().SelectUnit.transform.position =
-			//go.GetComponent<StateMachineHelper>().SelectUnit.transform.position - new Vector3(0, 0, 1);
+		targetPoint = go.GetComponent<StateMachineHelper>().SelectUnit.transform.position + movingPoint;
+
+		Debug.Log("Move point" + movingPoint);
+
+		animator.SetBool("HasTarget", false);
+		
+		if (GameObject.Find("GM").GetComponent<Placement>().Current_mana >= 1)
+		{
 
 			go.GetComponent<Placement>().Distance = true;
 
-			go.GetComponent<Placement>().PlaceUnit(go.GetComponent<StateMachineHelper>().SelectUnit.transform.position + new Vector3(0, 0, -1), go.GetComponent<StateMachineHelper>().SelectUnit);
-			
+			//Placing unit
+			if (go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)] == null)
+			{
+				go.GetComponent<Placement>().PlaceUnit(targetPoint, go.GetComponent<StateMachineHelper>().SelectUnit);
+			}
+			else
+			{
+				Destroy(go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)]);
+				go.GetComponent<StateMachineHelper>().TargetUnit = null;
+				go.GetComponent<Placement>().BlueList.Remove(go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)]);
+				go.GetComponent<Placement>().CellsArray[Mathf.RoundToInt(targetPoint.x), Mathf.RoundToInt(targetPoint.z)] = null;
+				go.GetComponent<Placement>().Current_mana--;
+			}
 			go.GetComponent<Placement>().Distance = false;
-		
-
-
-
-
-
-		
+				
 		}
-		else//(GameObject.Find("GM").GetComponent<Placement>().Current_mana <= 0.5)
+		else
 		{
-
-			go.GetComponent<Placement>().ChangeTurn();
-						
+			go.GetComponent<Placement>().ChangeTurn();					
 			animator.SetBool("IsWaiting", true);
 			animator.SetBool("HasMana", false);
+		}
+	}
 
+
+	void setZ()
+	{
+		GameObject go = GameObject.Find("GM");
+		if (go.GetComponent<StateMachineHelper>().BotDestination.z > 0)
+		{
+			movingPoint.z = -1;
+
+
+		}
+		else if (go.GetComponent<StateMachineHelper>().BotDestination.z < 0)
+		{
+			movingPoint.z = 1;
+		}else if (go.GetComponent<StateMachineHelper>().BotDestination.z == 0)
+		{
+			movingPoint.z = 0;
 		}
 	}
 
