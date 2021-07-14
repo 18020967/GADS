@@ -1066,10 +1066,10 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Single Player
+  m_Text: Single Player(AI BOT = RED)
 --- !u!222 &754578004
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1836,10 +1836,7 @@ MonoBehaviour:
     Same for Obstacles
 
 
-    Last player with units left wins
-
-
-'
+    Last player with units left wins'
 --- !u!222 &1669234435
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2268,6 +2265,10 @@ MonoBehaviour:
   Current_mana: 0
   Max_mana: 0
   Mana_cap: 10
+  height: 16
+  width: 16
+  offsetX: 100
+  offsetY: 100
 --- !u!95 &2144002319
 Animator:
   serializedVersion: 3

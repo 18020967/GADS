@@ -45,6 +45,7 @@ public class Placement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+
 		//ray casting to check what the player is selecting
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
@@ -205,8 +206,18 @@ public class Placement : MonoBehaviour
 		}
 	}
 
+	public int height = 16;
+	public int width = 16;
+
+	public float offsetX = 100f;
+	public float offsetY = 100f;
+
 	void StartGame()
 	{
+		offsetX = Random.Range(0f, 99999f);
+		offsetY = Random.Range(0f, 99999f);
+
+
 		//The array here is cleared to make room for units in the next round to start
 		CellsArray = new GameObject[16, 16];
 		Max_mana = 2;
@@ -230,11 +241,21 @@ public class Placement : MonoBehaviour
 		}
 		//This snip of code will place the Obstacles of the game in the center of the map
 		//nested if statement used to place Obstacles in a Square pattern and also stores them in a 2D array
-		for (int i1 = 5; i1 < 11; i1++)
+		for (int i1 = 0; i1 < width; i1++)
 		{
-			for (int i2 = 5; i2 < 11; i2++)
+			for (int i2 = 0; i2 < height; i2++)
 			{
-				CellsArray[i1, i2] = Instantiate(Obstacle, new Vector3(i1, 1, i2), Quaternion.identity);
+				if (CellsArray[i1,i2] == null)
+				{
+
+					if (caculatePerline(i1, i2)>=0.6)
+					{
+						CellsArray[i1, i2] = Instantiate(Obstacle, new Vector3(i1, 1, i2), Quaternion.identity);
+						CellsArray[i1, i2].transform.localScale = new Vector3(1, CellsArray[i1, i2].transform.localScale.y*(1+caculatePerline(i2*8, i1*8)*1.5f), 1);
+					} 
+					
+				}
+				
 			}
 		}
 
@@ -247,10 +268,13 @@ public class Placement : MonoBehaviour
 		{
 			Turn = "blue";
 		}
-
-
-
 	}
 
+	float caculatePerline(int x, int y)
+	{
+		float xCoord = (float)x / width * 2 + offsetX;
+		float yCoord = (float)y / height * 2 + offsetY;
 
+		return Mathf.PerlinNoise(xCoord, yCoord);
+	}
 }

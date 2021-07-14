@@ -16,8 +16,7 @@ public class Buttonhandler : MonoBehaviour
 	public void RestartScene()
 	{
 		SceneManager.LoadSceneAsync("MainScene");
-		GameObject go = GameObject.Find("Singleplayer");
-		go.GetComponent<ToggleSingleplayer>().toggle.enabled = true;
+		
 	}
 	//Button to quit the game
 	public void QuitGame()
@@ -37,6 +36,7 @@ public class Buttonhandler : MonoBehaviour
 	public void EnableButton()
 	{
 		Button.interactable = true;
+
 	}
 
 	
