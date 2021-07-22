@@ -8,6 +8,13 @@ public class Targeting : StateMachineBehaviour
 	public GameObject targetUnit;
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+
+		Search();
+
+	}
+
+	public void Search()
+	{
 		GameObject go = GameObject.Find("GM");
 		var nearestDist1 = float.MaxValue;
 		GameObject nearestObj1 = null;
@@ -22,17 +29,14 @@ public class Targeting : StateMachineBehaviour
 		targetUnit = nearestObj1;
 		go.GetComponent<StateMachineHelper>().TargetUnit = targetUnit;
 
-		if (go.GetComponent<Placement>().BlueList != null) ;
+		if (go.GetComponent<Placement>().BlueList != null)
 		{
 
 
 			go.GetComponent<StateMachineHelper>().BotDestination = go.GetComponent<StateMachineHelper>().SelectUnit.transform.position - targetUnit.transform.position;
-			Debug.Log("Destination point" + go.GetComponent<StateMachineHelper>().BotDestination);
+			//Debug.Log("Destination point" + go.GetComponent<StateMachineHelper>().BotDestination);
 		}
-
 	}
-
-
 
 
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

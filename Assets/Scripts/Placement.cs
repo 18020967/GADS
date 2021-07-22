@@ -86,6 +86,7 @@ public class Placement : MonoBehaviour
 					{
 						BlueList.Remove(hit.collider.gameObject);
 						Blue_Units--;
+						GameObject.Find("AdvancedAI").GetComponent<MachineLearning>().itemIndex--;
 					}
 
 					Current_mana--;
@@ -97,6 +98,7 @@ public class Placement : MonoBehaviour
 
 		}
 		GameObject go = GameObject.Find("Canvas");
+		GameObject gm = GameObject.Find("GM");
 		go.GetComponent<UI_Text>().UpdateScore(Max_mana,Current_mana,Turn,Blue_Units,Red_Units);
 
 		//Simple if statements to check how many units are left on the board
@@ -106,14 +108,14 @@ public class Placement : MonoBehaviour
 			Debug.Log("Blue Wins");
 			
 			go.GetComponent<UI_Text>().Winner("Blue");
-			go.GetComponent<Animator>().SetBool("IsWaiting", true);
+			gm.GetComponent<Animator>().SetBool("IsWaiting", true);
 		}
 
 		if (Blue_Units <=0)
 		{
 			Debug.Log("Red Wins");
 			go.GetComponent<UI_Text>().Winner("Red");
-			go.GetComponent<Animator>().SetBool("IsWaiting", true);
+			gm.GetComponent<Animator>().SetBool("IsWaiting", true);
 		}
 
 
@@ -230,9 +232,11 @@ public class Placement : MonoBehaviour
 			for (int j = 0; j < 4; j++)
 			{
 				CellsArray[i, j] = Instantiate(item, new Vector3(i, 1, j), Quaternion.identity);
+				item.name = ("Blue" +i+","+j); 
 				BlueList.Add(CellsArray[i, j]);
 				//word = i.ToString() + ":" + j.ToString();
 				CellsArray[i + 12, j + 12] = Instantiate(item2, new Vector3(i + 12, 1, j + 12), Quaternion.identity);
+				//item.name = ("Red" + i + "," + j);
 				RedList.Add(CellsArray[i+12, j+12]);
 				//word = i + 12.ToString() + ":" + j + 12.ToString();
 				Red_Units++;

@@ -38,16 +38,4 @@ public class Buttonhandler : MonoBehaviour
 		Button.interactable = true;
 
 	}
-
-	
-
-	private void Update()
-	{
-		
-
-
-		//go.GetComponent<Animator>().SetBool("IsWaiting", true);
-	}
-
-
 }

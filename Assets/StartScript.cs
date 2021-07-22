@@ -8,23 +8,54 @@ public class StartScript : MonoBehaviour
 
 	[SerializeField]
 	public Toggle toggle;
+	[SerializeField]
+	public Toggle toggleEasy;
+	[SerializeField]
+	public Toggle toggleAdvanced;
 
-	
+	public bool easyMode = false;
+
+	public bool advanced = false;
+
+
+
+
+	private void Start()
+	{
+		toggle.isOn = false;
+		toggleAdvanced.isOn = false;
+
+		toggleEasy.isOn = false;
+	}
 
 	public void StartGame()
 	{
 
-		GameObject go = GameObject.Find("SinglePlayer");
-
-
-		
 
 		var toggleActive = toggle.isOn;
+
+		easyMode = toggleEasy.isOn;
+
+		advanced = toggleAdvanced.isOn;
 
 		//toggle.onValueChanged.AddListener(changeToggleEvent);
 		changeToggleEvent(toggleActive);
 
 		toggle.isOn = false;
+
+		if (easyMode)
+		{
+			GameObject.Find("GM").GetComponent<StateMachineHelper>().EasyMode();
+		}
+
+		if (toggleAdvanced)
+		{
+			GameObject.Find("AdvancedAI").GetComponent<MachineLearning>().AdvancedMode();
+		}
+
+		toggleAdvanced.isOn = false;
+
+		toggleEasy.isOn = false;
 
 		GameObject.Find("MainMenu").SetActive(false);
 

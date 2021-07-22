@@ -12,6 +12,23 @@ public class StateMachineHelper : MonoBehaviour
 
 	public GameObject TargetUnit;
 
+
+	public bool easy = false;
+
+
+
+	public void EasyMode()
+	{
+		if (!easy){
+			easy = true;
+		}
+		else if(easy)
+		{
+			easy = false;
+		}
+	}
+
+
 	private void Update()
 	{
 		if (TargetUnit != null && SelectUnit != null)
@@ -20,6 +37,9 @@ public class StateMachineHelper : MonoBehaviour
 			
 
 			Debug.DrawLine(SelectUnit.transform.position, TargetUnit.transform.position, Color.red);
+		}else if(TargetUnit == null && SelectUnit == null)
+		{
+			return;
 		}
 	}
 

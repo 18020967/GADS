@@ -7,9 +7,17 @@ public class Placing : StateMachineBehaviour
 	Vector3 movingPoint;
 	Vector3 targetPoint;
 
+	bool easy = false;
+
 
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+
+		easy = GameObject.Find("GM").GetComponent<StateMachineHelper>().easy;
+
+
+
+
 		movingPoint.Set(0, 0, 0);
 		GameObject go = GameObject.Find("GM");
 		if (go.GetComponent<StateMachineHelper>().BotDestination.x > 0)
@@ -26,6 +34,15 @@ public class Placing : StateMachineBehaviour
 			movingPoint.x = 0;
 			setZ();
 		}
+
+		if (movingPoint.x != 0 && easy)
+		{
+			movingPoint.z = 0;
+		}
+
+	
+
+
 
 		targetPoint = go.GetComponent<StateMachineHelper>().SelectUnit.transform.position + movingPoint;
 
@@ -91,13 +108,13 @@ public class Placing : StateMachineBehaviour
 
 
 	
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
+	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	//{
 	
 
 
 
-	}
+	//}
 
 
 

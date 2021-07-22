@@ -32,5 +32,13 @@ public class Terrein_Generation : MonoBehaviour
 				grid = true;
 			}	
 		}
+
+		//for (int i2 = -1; i2 < 17; i2++)
+		//{
+		//	for (int j2 = -1; j2 < 17; j2++)
+		//	{
+
+		//	}
+		//}
     }
 }
