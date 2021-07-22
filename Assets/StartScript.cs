@@ -36,6 +36,11 @@ public class StartScript : MonoBehaviour
 
 		easyMode = toggleEasy.isOn;
 
+		if (toggleAdvanced.isOn == true)
+		{
+			GameObject.Find("AdvancedAI").GetComponent<MachineLearning>().AdvancedMode();
+		}
+
 		advanced = toggleAdvanced.isOn;
 
 		//toggle.onValueChanged.AddListener(changeToggleEvent);
@@ -48,10 +53,10 @@ public class StartScript : MonoBehaviour
 			GameObject.Find("GM").GetComponent<StateMachineHelper>().EasyMode();
 		}
 
-		if (toggleAdvanced)
-		{
-			GameObject.Find("AdvancedAI").GetComponent<MachineLearning>().AdvancedMode();
-		}
+		//if (toggleAdvanced == true)
+		//{
+		//	GameObject.Find("AdvancedAI").GetComponent<MachineLearning>().AdvancedMode();
+		//}
 
 		toggleAdvanced.isOn = false;
 

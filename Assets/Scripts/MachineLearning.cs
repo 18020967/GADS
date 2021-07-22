@@ -29,14 +29,10 @@ public class MachineLearning : MonoBehaviour
 
 	public void AdvancedMode()
 	{
-		if (!AIAdvanced)
-		{
+		
+		
 			AIAdvanced = true;
-		}
-		else if (AIAdvanced)
-		{
-			AIAdvanced = false;
-		}
+		
 	}
 
 	private void Start()
